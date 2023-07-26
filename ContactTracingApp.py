@@ -429,4 +429,11 @@ class ContactTracingApp (QMainWindow):
             
             # Wait for the fade-out animation to finish before exiting the application
             self.fade_out_animation.finished.connect(lambda: self.close_message_box())
-            
+        
+        else:
+            event.ignore()
+    
+    def close_message_box(self):
+        # Show a message box after closing the window
+        self.show_message_box("Thank you", "Thank you for using the COVID-19 Tracer App!")
+        self.close()
