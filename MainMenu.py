@@ -153,4 +153,6 @@ class MainMenu(QDialog):
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec_()
 
+app = QApplication(sys.argv)
+
     # Partially done
