@@ -346,3 +346,7 @@ class ContactTracingApp (QMainWindow):
 
             text_browser.setText(output)
             dialog.exec_()
+
+            # Clear other fields
+            self.clear_other_fields()
+            
