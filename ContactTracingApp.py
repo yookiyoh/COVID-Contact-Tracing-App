@@ -46,4 +46,12 @@ class ContactTracingApp (QMainWindow):
         super().__init__()
         self.setWindowTitle("COVID Contact Tracing App")
 
+        # Create a connection to the SQLite database
+        try:
+            self.conn = sqlite3.connect('contact_tracing.db')
+            self.c = self.conn.cursor()
+        except sqlite3.Error as e:
+            self.show_error_message("Database Error", str(e))
+            sys.exit()
+        
         
