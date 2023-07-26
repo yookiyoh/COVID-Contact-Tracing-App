@@ -68,4 +68,7 @@ class MainMenu(QDialog):
 
         self.setLayout(layout)
 
+        # Initialize the theme setting
+        self.is_dark_mode = False
+
         
