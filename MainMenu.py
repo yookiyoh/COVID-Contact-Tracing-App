@@ -93,3 +93,21 @@ class MainMenu(QDialog):
         # Set a custom dark palette
         dark_palette = self.get_dark_palette()
         app.setPalette(dark_palette)
+
+    # Function to get the custom dark palette
+    def get_dark_palette(self):
+        dark_palette = QPalette()
+        dark_palette.setColor(QPalette.window, QColor(53, 53, 53))
+        dark_palette.setColor(QPalette.windowText, Qt.white)
+        dark_palette.setColor(QPalette.base, QColor(25, 25, 25))
+        dark_palette.setColor(QPalette.alternateBase, QColor(53, 53, 53))
+        dark_palette.setColor(QPalette.toolTipBase, Qt.white)
+        dark_palette.setColor(QPalette.toolTipText, Qt.white)
+        dark_palette.setColor(QPalette.text, Qt.white)
+        dark_palette.setColor(QPalette.button, QColor(53, 53, 53))
+        dark_palette.setColor(QPalette.buttonText, Qt.white)
+        dark_palette.setColor(QPalette.brightText, Qt.red)
+        dark_palette.setColor(QPalette.link, QColor(42, 130, 218))
+        dark_palette.setColor(QPalette.highlight, QColor(42, 130, 218))
+        dark_palette.setColor(QPalette.highlightedText, Qt.black)
+        return dark_palette
