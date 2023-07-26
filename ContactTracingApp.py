@@ -349,4 +349,9 @@ class ContactTracingApp (QMainWindow):
 
             # Clear other fields
             self.clear_other_fields()
-            
+
+        except sqlite3.Error as e:
+            self.show_error_message("Database Error", str(e))
+
+    def get_selected_checkbox_value(self, checkboxes):
+        
