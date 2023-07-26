@@ -299,4 +299,10 @@ class ContactTracingApp (QMainWindow):
             if vaccinated == "Not Yet" or symptoms != "None of the above" or exposure != "No" or contact_with_symptoms == "Yes" or tested == "Yes-Positive":
                 self.show_message_box("Stay Home", "Please stay home and observe quarantine. Please take care of yourself.")
             
+            # Clear other fields
+            self.clear_other_fields()
+
+        except sqlite3.Error as e:
+            self.show_error_message("Database Error", str(e))
+
             
