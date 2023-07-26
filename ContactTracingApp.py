@@ -408,3 +408,6 @@ class ContactTracingApp (QMainWindow):
         self.entry_search.clear()
         self.clear_fields()
     
+    def clear_checkboxes(self, checkboxes):
+        for checkbox in checkboxes:
+            checkbox.setChecked(False)
