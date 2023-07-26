@@ -290,3 +290,13 @@ class ContactTracingApp (QMainWindow):
             self.entry_email.clear()
             self.entry_address.clear()
             self.entry_last_place_visited.clear()
+
+            # Write the entry to the records file
+            with open('contact_tracing_records.csv', 'a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([name, phone, email, address, last_place_visited, vaccinated, symptoms, exposure, contact_with_symptoms, tested])
+
+            if vaccinated == "Not Yet" or symptoms != "None of the above" or exposure != "No" or contact_with_symptoms == "Yes" or tested == "Yes-Positive":
+                self.show_message_box("Stay Home", "Please stay home and observe quarantine. Please take care of yourself.")
+            
+            
