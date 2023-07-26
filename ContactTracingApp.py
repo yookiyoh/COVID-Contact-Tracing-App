@@ -200,3 +200,10 @@ class ContactTracingApp (QMainWindow):
         layout.addWidget(self.button_add, 29, 0)
         layout.addWidget(self.button_search, 29, 1)
         layout.addWidget(self.button_clear, 29, 2)
+
+        self.entry_search = QLineEdit()
+        layout.addWidget(self.entry_search, 30, 0, 1, 3)
+
+        central_widget = QWidget()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
