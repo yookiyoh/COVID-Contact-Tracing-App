@@ -89,4 +89,7 @@ class MainMenu(QDialog):
     def set_dark_mode(self):
         self.is_dark_mode = True
         app.setStyle(QStyleFactory.create("Fusion"))
-        
+
+        # Set a custom dark palette
+        dark_palette = self.get_dark_palette()
+        app.setPalette(dark_palette)
