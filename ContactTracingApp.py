@@ -192,7 +192,7 @@ class ContactTracingApp (QMainWindow):
         layout.addWidget(self.checkbox_contact_with_symptoms_no, 23, 1)
 
         layout.addWidget(self.label_tested, 24, 0)
-        layout.addWidget(self.checkbox_tested_no 25, 0)
+        layout.addWidget(self.checkbox_tested_no, 25, 0)
         layout.addWidget(self.checkbox_tested_positive, 26, 0)
         layout.addWidget(self.checkbox_tested_negative, 27, 0)
         layout.addWidget(self.checkbox_tested_pending, 28, 0)
