@@ -47,4 +47,15 @@ class MainMenu(QDialog):
         self.setWindowTitle("Space Trace")
         layout = QVBoxLayout()
 
-        
+        # Create buttons and connect them to their respective functions
+        self.button_start = QPushButton("Start")
+        self.button_start.clicked.connect(self.start_contact_tracing)
+
+        self.button_exit = QPushButton("Exit")
+        self.button_exit.clicked.connect(self.close)
+
+        self.button_dark_mode = QPushButton("☾")
+        self.button_dark_mode.clicked.connect(self.toggle_dark_mode)
+
+        self.button_overview = QPushButton("?")
+        self.button_overview.clicked.connect(self.show_overview)
