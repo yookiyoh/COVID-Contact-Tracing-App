@@ -427,3 +427,6 @@ class ContactTracingApp (QMainWindow):
             except sqlite3.Error as e:
                 self.show_error_message("Database Error", str(e))
             
+            # Wait for the fade-out animation to finish before exiting the application
+            self.fade_out_animation.finished.connect(lambda: self.close_message_box())
+            
