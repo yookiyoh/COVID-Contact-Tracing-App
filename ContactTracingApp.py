@@ -445,4 +445,7 @@ class ContactTracingApp (QMainWindow):
         print("#" * 50)
         print(f"\n{message}\n")
 
-        
+        # Use pyfiglet for error message styling
+        f = Figlet(font='slant')
+        error_message = f.renderText("Error!")
+        print(error_message)
