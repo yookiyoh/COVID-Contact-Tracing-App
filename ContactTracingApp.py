@@ -437,3 +437,12 @@ class ContactTracingApp (QMainWindow):
         # Show a message box after closing the window
         self.show_message_box("Thank you", "Thank you for using the COVID-19 Tracer App!")
         self.close()
+
+    @staticmethod
+    def show_error_message(title, message):
+        print("\n" + "#" * 50)
+        print(title.center(50))
+        print("#" * 50)
+        print(f"\n{message}\n")
+
+        
