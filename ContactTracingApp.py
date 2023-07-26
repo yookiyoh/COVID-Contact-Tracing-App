@@ -223,3 +223,14 @@ class ContactTracingApp (QMainWindow):
         animation.setEasingCurve(QEasingCurve.InOutQuad)
         return animation
     
+    def add_entry(self):
+        name = self.entry_name.text()
+        phone = self.entry_phone.text()
+        email = self.entry_email.text()
+        address = self.entry_address.text()
+        last_place_visited = self.entry_last_place_visited.text()
+
+        # Check if all fields are filled
+        if not name or not phone or not email or not address or not last_place_visited:
+            self.show_message_box("Incomplete Fields", "Please input all fields.")
+            return
