@@ -144,4 +144,11 @@ class MainMenu(QDialog):
         """
         self.show_message_box("Overview", introduction_text)
 
-    
+    # Function to show a message box
+    def show_message_box(self, title, message):
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle(title)
+        msg_box.setText(message)
+        msg_box.setIcon(QMessageBox.warning)
+        msg_box.setStandardButtons(QMessageBox.Ok)
+        msg_box.exec_()
