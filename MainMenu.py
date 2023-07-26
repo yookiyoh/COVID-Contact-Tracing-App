@@ -84,4 +84,9 @@ class MainMenu(QDialog):
     def set_light_mode(self):
         self.is_dark_mode = False
         app.setStyle(QStyleFactory.create("Fusion"))
+    
+    # Function to set the dark mode theme
+    def set_dark_mode(self):
+        self.is_dark_mode = True
+        app.setStyle(QStyleFactory.create("Fusion"))
         
