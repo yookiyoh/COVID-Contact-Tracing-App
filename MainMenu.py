@@ -118,3 +118,5 @@ class MainMenu(QDialog):
         self.close()
         self.contact_tracing_app = ContactTracingApp()
         self.contact_tracing_app.show()
+    
+    
