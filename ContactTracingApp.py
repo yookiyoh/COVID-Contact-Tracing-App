@@ -31,7 +31,7 @@
 
 # Import necessary libraries
 import typing
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget, \
      QListWidget, QCheckBox, QMessageBox, QDialog, QHBoxLayout, QTextBrowser, QGridLayout, QStyleFactory
 from PyQt5.QtCore import QPropertyAnimation, QEasingCurve, Qt
@@ -411,3 +411,19 @@ class ContactTracingApp (QMainWindow):
     def clear_checkboxes(self, checkboxes):
         for checkbox in checkboxes:
             checkbox.setChecked(False)
+    
+    def closeEvent(self, event):
+        # Prompt a confirmation dialog when closing the window
+        reply = QMessageBox.question(self, 'Confirmation', "Are you sure you want to close this application?",
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        
+        if reply == QMessageBox.Yes:
+            # Start the fade-out animation
+            self.fade_out_animation.start()
+
+            # Close the database connection when the app is closed
+            try:
+                self.conn.close()
+            except sqlite3.Error as e:
+                self.show_error_message("Database Error", str(e))
+            
