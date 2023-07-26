@@ -403,3 +403,8 @@ class ContactTracingApp (QMainWindow):
             self.checkbox_tested_negative,
             self.checkbox_tested_pending
         ])
+
+    def clear_other_fields(self):
+        self.entry_search.clear()
+        self.clear_fields()
+    
