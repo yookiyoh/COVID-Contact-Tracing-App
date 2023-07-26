@@ -283,3 +283,10 @@ class ContactTracingApp (QMainWindow):
                            contact_with_symptoms, tested) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
                            (name, phone, email, address, last_place_visited, vaccinated, symptoms, exposure, contact_with_symptoms, tested))
             self.conn.commit()
+
+            # Clear the input fields
+            self.entry_name.clear()
+            self.entry_phone.clear()
+            self.entry_email.clear()
+            self.entry_address.clear()
+            self.entry_last_place_visited.clear()
