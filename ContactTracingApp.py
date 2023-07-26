@@ -354,4 +354,16 @@ class ContactTracingApp (QMainWindow):
             self.show_error_message("Database Error", str(e))
 
     def get_selected_checkbox_value(self, checkboxes):
-        
+        for checkbox in checkboxes:
+            if checkbox.isChecked():
+                return checkbox.text()
+            
+        return ""
+    
+    def show_message_box(self, title, message):
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle(title)
+        msg_box.setText(message)
+        msg_box.setIcon(QMessageBox.Warning)
+        msg_box.setStandardButtons(QMessageBox.Ok)
+        msg_box.exec_()
