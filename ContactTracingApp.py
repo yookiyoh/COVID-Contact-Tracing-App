@@ -320,3 +320,14 @@ class ContactTracingApp (QMainWindow):
                 self.show_message_box("No Results", "No matching entries found.")
                 return
             
+            # Open a new window to display the search results
+            dialog = QDialog(self)
+            dialog.setWindowTitle("Search Results")
+            dialog.setMinimumWidth(400)
+
+            layout = QHBoxLayout()
+            text_browser = QTextBrowser()
+            layout.addWidget(text_browser)
+            dialog.setLayout(layout)
+
+            
