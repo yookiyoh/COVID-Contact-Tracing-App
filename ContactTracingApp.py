@@ -39,7 +39,6 @@ from PyQt5.QtGui import QColor, QPalette
 import csv
 import sqlite3
 from pyfiglet import Figlet
-import datetime
 
 # Define the Contact Tracing App class that inherits the QMainWindow
 class ContactTracingApp (QMainWindow):
@@ -69,7 +68,6 @@ class ContactTracingApp (QMainWindow):
                                 exposure TEXT,
                                 contact_with_symptoms TEXT,
                                 tested TEXT,
-                                current_datetime TEXT,
                            )''')
             self.conn.commit()
         except sqlite3.Error as e:
