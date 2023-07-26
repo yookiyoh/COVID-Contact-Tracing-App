@@ -71,4 +71,13 @@ class MainMenu(QDialog):
         # Initialize the theme setting
         self.is_dark_mode = False
 
-        
+    # Function to toggle between light and dark themes
+    def toggle_dark_mode(self):
+        self.is_dark_mode = not self.is_dark_mode   # Toggle the theme
+
+        if self.is_dark_mode:
+            self.set_dark_mode()
+        else:
+            self.set_light_mode()
+
+    
