@@ -259,4 +259,20 @@ class ContactTracingApp (QMainWindow):
             self.checkbox_symptoms_none
         ])
 
-        
+        exposure = self.get_selected_checkbox_value([
+            self.checkbox_exposure_yes,
+            self.checkbox_exposure_no,
+            self.checkbox_exposure_uncertain
+        ])
+
+        contact_with_symptoms = self.get_selected_checkbox_value([
+            self.checkbox_contact_with_symptoms_yes,
+            self.checkbox_contact_with_symptoms_no,
+        ])
+
+        tested = self.get_selected_checkbox_value([
+            self.checkbox_tested_no,
+            self.checkbox_tested_positive,
+            self.checkbox_tested_negative,
+            self.checkbox_tested_pending,
+        ])
