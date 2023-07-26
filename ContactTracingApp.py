@@ -306,4 +306,17 @@ class ContactTracingApp (QMainWindow):
             self.show_error_message("Database Error", str(e))
 
     def search_entry(self):
-        
+        search_term = self.entry_search.text()
+
+        try:
+            # Search for entries in the database that match the search term
+            self.c.execute('''SELECT * FROM contacts WHERE
+                              name LIKE ? OR phone LIKE ? OR email LIKE ? OR address LIKE ? OR last_place_visited LIKE ?'''
+                           ('%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%',
+                            '%' + search_term + '%', '%' + search_term + '%'))
+            results = self.c.fetchall()
+
+            if not results:
+                self.show_message_box("No Results", "No matching entries found.")
+                return
+            
