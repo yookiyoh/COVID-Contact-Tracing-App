@@ -39,6 +39,7 @@ from PyQt5.QtGui import QColor, QPalette
 import csv
 import sqlite3
 from pyfiglet import Figlet
+import datetime
 
 # Define the Contact Tracing App class that inherits the QMainWindow
 class ContactTracingApp (QMainWindow):
@@ -54,4 +55,12 @@ class ContactTracingApp (QMainWindow):
             self.show_error_message("Database Error", str(e))
             sys.exit()
         
-        
+        # Create a table to store the contact tracing information
+        try:
+            self.c.execute('''CREATE TABLE IF NOT EXISTS contacts (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                name TEXT
+                                phone TEXT
+                                email TEXT
+                                address TEXT
+                                current_datetime
