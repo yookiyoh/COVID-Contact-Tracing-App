@@ -152,3 +152,5 @@ class MainMenu(QDialog):
         msg_box.setIcon(QMessageBox.warning)
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec_()
+
+    # Partially done
