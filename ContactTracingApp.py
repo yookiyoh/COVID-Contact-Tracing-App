@@ -143,4 +143,60 @@ class ContactTracingApp (QMainWindow):
         self.button_clear = QPushButton("Clear")        
         self.button_clear.clicked.connect(self.clear_entry)
 
+        # Set up the layout
+        layout = QGridLayout()
+
+        layout.addWidget(self.label_name, 0, 0)
+        layout.addWidget(self.entry_name, 0, 1)
         
+        layout.addWidget(self.label_phone, 1, 0)
+        layout.addWidget(self.entry_phone, 1, 1)
+
+        layout.addWidget(self.label_email, 2, 0)
+        layout.addWidget(self.entry_email, 2, 1)
+
+        layout.addWidget(self.label_address, 3, 0)
+        layout.addWidget(self.entry_address, 3, 1)
+
+        layout.addWidget(self.label_last_place_visited, 4, 0)
+        layout.addWidget(self.entry_last_place_visited, 4, 1)
+
+        layout.addWidget(self.label_vaccinated, 5, 0)
+        layout.addWidget(self.checkbox_vaccinated_not_yet, 6, 0)
+        layout.addWidget(self.checkbox_vaccinated_1st_dose, 7, 0)
+        layout.addWidget(self.checkbox_vaccinated_2nd_dose, 8, 0)
+        layout.addWidget(self.checkbox_vaccinated_1st_booster, 9, 0)
+        layout.addWidget(self.checkbox_vaccinated_2nd_booster, 10, 0)
+
+        layout.addWidget(self.label_symptoms, 5, 1)
+        layout.addWidget(self.checkbox_symptoms_fever, 6, 1)
+        layout.addWidget(self.checkbox_symptoms_cough, 7, 1)
+        layout.addWidget(self.checkbox_symptoms_colds, 8, 1)
+        layout.addWidget(self.checkbox_symptoms_body_pains, 9, 1)
+        layout.addWidget(self.checkbox_symptoms_sore_throat, 10, 1)
+        layout.addWidget(self.checkbox_symptoms_diarrhea, 11, 1)
+        layout.addWidget(self.checkbox_symptoms_headache, 12, 1)
+        layout.addWidget(self.checkbox_symptoms_shortness_breath, 13, 1)
+        layout.addWidget(self.checkbox_symptoms_difficulty_breathing, 14, 1)
+        layout.addWidget(self.checkbox_symptoms_loss_taste, 15, 1)
+        layout.addWidget(self.checkbox_symptoms_loss_smell, 16, 1)
+        layout.addWidget(self.checkbox_symptoms_none, 17, 1)
+
+        layout.addWidget(self.label_exposure, 18, 0)
+        layout.addWidget(self.checkbox_exposure_yes, 19, 0)
+        layout.addWidget(self.checkbox_exposure_no, 20, 0)
+        layout.addWidget(self.checkbox_exposure_uncertain, 21, 0)
+
+        layout.addWidget(self.label_contact_with_symptoms, 18, 1, 4, 1)
+        layout.addWidget(self.checkbox_contact_with_symptoms_yes, 22, 1)
+        layout.addWidget(self.checkbox_contact_with_symptoms_no, 23, 1)
+
+        layout.addWidget(self.label_tested, 24, 0)
+        layout.addWidget(self.checkbox_tested_no 25, 0)
+        layout.addWidget(self.checkbox_tested_positive, 26, 0)
+        layout.addWidget(self.checkbox_tested_negative, 27, 0)
+        layout.addWidget(self.checkbox_tested_pending, 28, 0)
+
+        layout.addWidget(self.button_add, 29, 0)
+        layout.addWidget(self.button_search, 29, 1)
+        layout.addWidget(self.button_clear, 29, 2)
