@@ -449,3 +449,5 @@ class ContactTracingApp (QMainWindow):
         f = Figlet(font='slant')
         error_message = f.renderText("Error!")
         print(error_message)
+
+        # Partially done
