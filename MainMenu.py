@@ -39,6 +39,7 @@ from PyQt5.QtGui import QColor, QPalette
 import csv
 import sqlite3
 from pyfiglet import Figlet
+from ContactTracingApp import ContactTracingApp
 
 # Define the Main Menu class that inherits from QDialog
 class MainMenu(QDialog):
@@ -111,3 +112,9 @@ class MainMenu(QDialog):
         dark_palette.setColor(QPalette.highlight, QColor(42, 130, 218))
         dark_palette.setColor(QPalette.highlightedText, Qt.black)
         return dark_palette
+    
+    # Function to start the contact tracing app
+    def start_contact_tracing(self):
+        self.close()
+        self.contact_tracing_app = ContactTracingApp()
+        self.contact_tracing_app.show()
