@@ -59,3 +59,13 @@ class MainMenu(QDialog):
 
         self.button_overview = QPushButton("?")
         self.button_overview.clicked.connect(self.show_overview)
+
+        # Add buttons to the layout
+        layout.addWidget(self.button_start)
+        layout.addWidget(self.button_dark_mode)
+        layout.addWidget(self.button_overview)
+        layout.addWidget(self.button_exit)
+
+        self.setLayout(layout)
+
+        
