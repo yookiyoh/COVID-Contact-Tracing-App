@@ -215,3 +215,11 @@ class ContactTracingApp (QMainWindow):
         # Start the fade-in animation
         self.fade_in_animation.start()
         
+    def create_fade_animation(self, target, start_opacity, end_opacity):
+        animation = QPropertyAnimation(target, b"windowOpacity")
+        animation.setDuration(500)
+        animation.setStartValue(start_opacity)
+        animation.setEndValue(end_opacity)
+        animation.setEasingCurve(QEasingCurve.InOutQuad)
+        return animation
+    
