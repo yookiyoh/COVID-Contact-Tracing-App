@@ -305,4 +305,5 @@ class ContactTracingApp (QMainWindow):
         except sqlite3.Error as e:
             self.show_error_message("Database Error", str(e))
 
-            
+    def search_entry(self):
+        
