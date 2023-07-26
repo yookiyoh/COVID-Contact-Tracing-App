@@ -267,14 +267,14 @@ class ContactTracingApp (QMainWindow):
 
         contact_with_symptoms = self.get_selected_checkbox_value([
             self.checkbox_contact_with_symptoms_yes,
-            self.checkbox_contact_with_symptoms_no,
+            self.checkbox_contact_with_symptoms_no
         ])
 
         tested = self.get_selected_checkbox_value([
             self.checkbox_tested_no,
             self.checkbox_tested_positive,
             self.checkbox_tested_negative,
-            self.checkbox_tested_pending,
+            self.checkbox_tested_pending
         ])
 
         try:
@@ -367,3 +367,31 @@ class ContactTracingApp (QMainWindow):
         msg_box.setIcon(QMessageBox.Warning)
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec_()
+
+    def clear_fields(self):
+        self.entry_name.clear()
+        self.entry_phone.clear()
+        self.entry_email.clear()
+        self.entry_address.clear()
+        self.entry_last_place_visited.clear()
+
+        self.checkbox_vaccinated_not_yet.clear()
+        self.checkbox_vaccinated_1st_dose.clear()
+        self.checkbox_vaccinated_2nd_dose.clear()
+        self.checkbox_vaccinated_1st_booster.clear()
+        self.checkbox_vaccinated_2nd_booster.clear()
+        self.checkbox_symptoms_fever.clear()
+        self.checkbox_symptoms_cough.clear()
+        self.checkbox_symptoms_colds.clear()
+        self.checkbox_symptoms_body_pains.clear()
+        self.checkbox_symptoms_sore_throat.clear()
+        self.checkbox_symptoms_diarrhea.clear()
+        self.checkbox_symptoms_headache.clear()
+        self.checkbox_symptoms_shortness_breath.clear()
+        self.checkbox_symptoms_difficulty_breathing.clear()
+        self.checkbox_symptoms_loss_taste.clear()
+        self.checkbox_symptoms_loss_smell.clear()
+        self.checkbox_symptoms_none.clear()
+        self.checkbox_exposure_yes.clear()
+        self.checkbox_exposure_no.clear()
+        self.checkbox_exposure_uncertain.clear()
