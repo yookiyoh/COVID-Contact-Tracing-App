@@ -42,4 +42,9 @@ from pyfiglet import Figlet
 
 # Define the Main Menu class that inherits from QDialog
 class MainMenu(QDialog):
-    
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Space Trace")
+        layout = QVBoxLayout()
+
+        
