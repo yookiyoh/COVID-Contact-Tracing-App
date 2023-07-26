@@ -133,4 +133,14 @@ class ContactTracingApp (QMainWindow):
         self.checkbox_tested_negative = QCheckBox("Yes-Negative")
         self.checkbox_tested_pending = QCheckBox("Yes-Pending")
 
+        # Create buttons
+        self.button_add = QPushButton("Add Entry")        
+        self.button_add.clicked.connect(self.add_entry)
+
+        self.button_search = QPushButton("Search")        
+        self.button_search.clicked.connect(self.search_entry)
+        
+        self.button_clear = QPushButton("Clear")        
+        self.button_clear.clicked.connect(self.clear_entry)
+
         
