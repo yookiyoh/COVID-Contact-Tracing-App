@@ -119,4 +119,29 @@ class MainMenu(QDialog):
         self.contact_tracing_app = ContactTracingApp()
         self.contact_tracing_app.show()
     
+    # Function to show the introduction message
+    def show_overview(self):
+        # Introduction message HTML content
+        introduction_text = """
+        <p style="text-align: justify;">Welcome to Space Trace!</p>
+
+        <p style="text-align: justify;">This application is designed to help track COVID-19 exposure and symptoms for individuals.
+        It allows you to add new entries in accordance to your inputted personal details for procured records and tracking within the database.</p>
+
+        <p style="text-align: justify;">Usage:
+        <ol>
+        <li>Click on "Start" to enter contact tracing information for an individual.</li>
+        <li>Fill in all the required details and answer the questions.</li>
+        <li>Click on "Add Entry" to save the information to the database.</li>
+        <li>You will be notified if you need to stay home and observe quarantine based on your symptoms or exposure.</li>
+        <li>Use the "Search" button to find specific entries in the database.</li>
+        <li>Use the "☾" button to switch between light and dark themes.</li>
+        <li>Click on the "Exit" to close the application.</li>
+        </ol>
+        </p>
+
+        <p style="text-align: justify;">Thank you for using Space Trace!</p>
+        """
+        self.show_message_box("Overview", introduction_text)
+
     
