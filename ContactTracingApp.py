@@ -243,3 +243,20 @@ class ContactTracingApp (QMainWindow):
             self.checkbox_vaccinated_1st_booster,
             self.checkbox_vaccinated_2nd_booster
         ])
+
+        symptoms = self.get_selected_checkbox_value([
+            self.checkbox_symptoms_fever,
+            self.checkbox_symptoms_cough,
+            self.checkbox_symptoms_colds,
+            self.checkbox_symptoms_body_pains,
+            self.checkbox_symptoms_sore_throat,
+            self.checkbox_symptoms_diarrhea,
+            self.checkbox_symptoms_headache,
+            self.checkbox_symptoms_shortness_breath,
+            self.checkbox_symptoms_difficulty_breathing,
+            self.checkbox_symptoms_loss_taste,
+            self.checkbox_symptoms_loss_smell,
+            self.checkbox_symptoms_none
+        ])
+
+        
