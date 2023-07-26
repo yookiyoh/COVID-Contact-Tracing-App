@@ -234,3 +234,12 @@ class ContactTracingApp (QMainWindow):
         if not name or not phone or not email or not address or not last_place_visited:
             self.show_message_box("Incomplete Fields", "Please input all fields.")
             return
+        
+        # Get the selected checkboxes
+        vaccinated = self.get_selected_checkbox_value([
+            self.checkbox_vaccinated_not_yet,
+            self.checkbox_vaccinated_1st_dose,
+            self.checkbox_vaccinated_2nd_dose,
+            self.checkbox_vaccinated_1st_booster,
+            self.checkbox_vaccinated_2nd_booster
+        ])
