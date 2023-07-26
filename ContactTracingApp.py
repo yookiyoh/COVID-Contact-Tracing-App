@@ -276,3 +276,10 @@ class ContactTracingApp (QMainWindow):
             self.checkbox_tested_negative,
             self.checkbox_tested_pending,
         ])
+
+        try:
+            # Insert the entry into the database
+            self.c.execute('''INSERT INTO contacts (name, phone, email, address, last_place_visited, vaccinated, symptoms, exposure,
+                           contact_with_symptoms, tested) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                           (name, phone, email, address, last_place_visited, vaccinated, symptoms, exposure, contact_with_symptoms, tested))
+            self.conn.commit()
