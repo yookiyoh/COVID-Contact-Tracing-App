@@ -30,6 +30,8 @@
 '''
 
 # Import necessary libraries
+import typing
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget, \
      QListWidget, QCheckBox, QMessageBox, QDialog, QHBoxLayout, QTextBrowser, QGridLayout, QStyleFactory
 from PyQt5.QtCore import QPropertyAnimation, QEasingCurve, Qt
@@ -38,3 +40,10 @@ import csv
 import sqlite3
 from pyfiglet import Figlet
 
+# Define the Contact Tracing App class that inherits the QMainWindow
+class ContactTracingApp (QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("COVID Contact Tracing App")
+
+        
