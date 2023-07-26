@@ -28,3 +28,13 @@
     # Create and show the MainMenu window
     # Run the application
 '''
+
+# Import necessary libraries
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget, \
+     QListWidget, QCheckBox, QMessageBox, QDialog, QHBoxLayout, QTextBrowser, QGridLayout, QStyleFactory
+from PyQt5.QtCore import QPropertyAnimation, QEasingCurve, Qt
+from PyQt5.QtGui import QColor, QPalette
+import csv
+import sqlite3
+from pyfiglet import Figlet
+
