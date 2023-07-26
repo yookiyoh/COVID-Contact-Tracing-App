@@ -40,3 +40,6 @@ import csv
 import sqlite3
 from pyfiglet import Figlet
 
+# Define the Main Menu class that inherits from QDialog
+class MainMenu(QDialog):
+    
