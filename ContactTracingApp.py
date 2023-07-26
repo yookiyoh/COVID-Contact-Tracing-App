@@ -59,8 +59,20 @@ class ContactTracingApp (QMainWindow):
         try:
             self.c.execute('''CREATE TABLE IF NOT EXISTS contacts (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                name TEXT
-                                phone TEXT
-                                email TEXT
-                                address TEXT
-                                current_datetime
+                                name TEXT,
+                                phone TEXT,
+                                email TEXT,
+                                address TEXT,
+                                last_place_visited TEXT,
+                                vaccinated TEXT,
+                                symptoms TEXT,
+                                exposure TEXT,
+                                contact_with_symptoms TEXT,
+                                tested TEXT,
+                                current_datetime TEXT,
+                           )''')
+            self.conn.commit()
+        except sqlite3.Error as e:
+            self.show_error_message("Database Error", str(e))
+            sys.exit()
+            
