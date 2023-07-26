@@ -211,3 +211,7 @@ class ContactTracingApp (QMainWindow):
         # Set up the animations
         self.fade_in_animation = self.create_fade_animation(central_widget, start_opacity=0.0, end_opacity=1.0)
         self.fade_out_animation = self.create_fade_animation(central_widget, start_opacity=1.0, end_opacity=0.0)
+
+        # Start the fade-in animation
+        self.fade_in_animation.start()
+        
