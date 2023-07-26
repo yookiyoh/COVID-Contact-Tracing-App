@@ -31,9 +31,8 @@
 
 # Import necessary libraries
 import sys
-from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget, \
-     QListWidget, QCheckBox, QMessageBox, QDialog, QHBoxLayout, QTextBrowser, QGridLayout, QStyleFactory
+     QListWidget, QCheckBox, QMessageBox, QDialog, QHBoxLayout, QTextBrowser, QGridLayout, QStyleFactory, QToolButton, QInputDialog
 from PyQt5.QtCore import QPropertyAnimation, QEasingCurve, Qt
 from PyQt5.QtGui import QColor, QPalette
 import csv
@@ -52,11 +51,17 @@ class MainMenu(QDialog):
         self.button_start = QPushButton("Start")
         self.button_start.clicked.connect(self.start_contact_tracing)
 
+        self.button_search = QPushButton("Search")
+        self.button_search.clicked.connect(self.search_contacts)
+
         self.button_exit = QPushButton("Exit")
         self.button_exit.clicked.connect(self.close)
 
-        self.button_dark_mode = QPushButton("☾")
-        self.button_dark_mode.clicked.connect(self.toggle_dark_mode)
+        # Button for the dark mode toggle switch
+        self.button_dark_mode = QToolButton()
+        self.button_dark_mode.setText("☾ Dark Mode")
+        self.button_dark_mode.setCheckable(True)
+        self.button_dark_mode.toggled.connect(self.toggle_dark_mode)
 
         self.button_overview = QPushButton("?")
         self.button_overview.clicked.connect(self.show_overview)
@@ -64,6 +69,7 @@ class MainMenu(QDialog):
         # Add buttons to the layout
         layout.addWidget(self.button_start)
         layout.addWidget(self.button_dark_mode)
+        layout.addWidget(self.button_search)
         layout.addWidget(self.button_overview)
         layout.addWidget(self.button_exit)
 
@@ -71,10 +77,19 @@ class MainMenu(QDialog):
 
         # Initialize the theme setting
         self.is_dark_mode = False
+        self.set_light_mode()
+
+        # Create a connection to the SQLite database and initialize the cursor
+        try:
+            self.conn = sqlite3.connect('contact_tracing.db')
+            self.c = self.conn.cursor()
+        except sqlite3.Error as e:
+            self.show_error_message("Database Error", str(e))
+            sys.exit()
 
     # Function to toggle between light and dark themes
-    def toggle_dark_mode(self):
-        self.is_dark_mode = not self.is_dark_mode   # Toggle the theme
+    def toggle_dark_mode(self, is_dark_mode):
+        self.is_dark_mode = is_dark_mode
 
         if self.is_dark_mode:
             self.set_dark_mode()
@@ -84,34 +99,33 @@ class MainMenu(QDialog):
     # Function to set the light mode theme
     def set_light_mode(self):
         self.is_dark_mode = False
-        app.setStyle(QStyleFactory.create("Fusion"))
+        QApplication.setStyle("Fusion")
+        palette = QPalette()
+        palette.setColor(QPalette.Window, QColor(Qt.white))
+        palette.setColor(QPalette.WindowText, QColor(Qt.black))
+        QApplication.setPalette(palette)
+        self.button_dark_mode.setText("☾ Dark Mode")
     
     # Function to set the dark mode theme
     def set_dark_mode(self):
         self.is_dark_mode = True
-        app.setStyle(QStyleFactory.create("Fusion"))
-
-        # Set a custom dark palette
-        dark_palette = self.get_dark_palette()
-        app.setPalette(dark_palette)
-
-    # Function to get the custom dark palette
-    def get_dark_palette(self):
+        QApplication.setStyle("Fusion")
         dark_palette = QPalette()
-        dark_palette.setColor(QPalette.window, QColor(53, 53, 53))
-        dark_palette.setColor(QPalette.windowText, Qt.white)
-        dark_palette.setColor(QPalette.base, QColor(25, 25, 25))
-        dark_palette.setColor(QPalette.alternateBase, QColor(53, 53, 53))
-        dark_palette.setColor(QPalette.toolTipBase, Qt.white)
-        dark_palette.setColor(QPalette.toolTipText, Qt.white)
-        dark_palette.setColor(QPalette.text, Qt.white)
-        dark_palette.setColor(QPalette.button, QColor(53, 53, 53))
-        dark_palette.setColor(QPalette.buttonText, Qt.white)
-        dark_palette.setColor(QPalette.brightText, Qt.red)
-        dark_palette.setColor(QPalette.link, QColor(42, 130, 218))
-        dark_palette.setColor(QPalette.highlight, QColor(42, 130, 218))
-        dark_palette.setColor(QPalette.highlightedText, Qt.black)
-        return dark_palette
+        dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
+        dark_palette.setColor(QPalette.WindowText, Qt.white)
+        dark_palette.setColor(QPalette.Base, QColor(25, 25, 25))
+        dark_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+        dark_palette.setColor(QPalette.ToolTipBase, Qt.white)
+        dark_palette.setColor(QPalette.ToolTipText, Qt.white)
+        dark_palette.setColor(QPalette.Text, Qt.white)
+        dark_palette.setColor(QPalette.Button, QColor(53, 53, 53))
+        dark_palette.setColor(QPalette.ButtonText, Qt.white)
+        dark_palette.setColor(QPalette.BrightText, Qt.red)
+        dark_palette.setColor(QPalette.Link, QColor(42, 130, 218))
+        dark_palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
+        dark_palette.setColor(QPalette.HighlightedText, Qt.black)
+        QApplication.setPalette(dark_palette)
+        self.button_dark_mode.setText("☀ Light Mode")
     
     # Function to start the contact tracing app
     def start_contact_tracing(self):
@@ -149,10 +163,60 @@ class MainMenu(QDialog):
         msg_box = QMessageBox()
         msg_box.setWindowTitle(title)
         msg_box.setText(message)
-        msg_box.setIcon(QMessageBox.warning)
+        msg_box.setIcon(QMessageBox.Warning)
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec_()
 
-app = QApplication(sys.argv)
+    # Function to search contacts and display the results
+    def search_contacts(self):
+        # Open a new window to display the search results
+        self.search_result_window = QDialog(self)
+        self.search_result_window.setWindowTitle("Search Results")
+        self.search_result_window.setMinimumWidth(400)
 
-    # Partially done
+        # Create a layout for the search result window
+        layout = QVBoxLayout()
+        text_browser = QTextBrowser()
+        layout.addWidget(text_browser)
+        self.search_result_window.setLayout(layout)
+
+        # Get the search term from the user
+        search_term, ok = QInputDialog.getText(self, "Search Contacts", "Enter search term:")
+        if ok and search_term.strip():
+            try:
+                # Search for entries in the database that match the search term
+                self.c.execute('''SELECT * FROM contacts WHERE
+                                  name LIKE ? OR phone LIKE ? OR email LIKE ? OR address LIKE ? OR last_place_visited LIKE ?''',
+                               ('%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%',
+                                '%' + search_term + '%', '%' + search_term + '%'))
+                results = self.c.fetchall()
+
+                if not results:
+                    self.show_message_box("No Results", "No matching entries found.")
+                    return
+
+                # Display the search results in the text browser
+                output = ""
+                for result in results:
+                    output += f"Name: {result[1]}\n"
+                    output += f"Phone: {result[2]}\n"
+                    output += f"Email: {result[3]}\n"
+                    output += f"Address: {result[4]}\n"
+                    output += f"Last Place Visited: {result[5]}\n"
+                    output += f"Vaccinated: {result[6]}\n"
+                    output += f"Symptoms: {result[7]}\n"
+                    output += f"Exposure: {result[8]}\n"
+                    output += f"Contact with Symptoms: {result[9]}\n"
+                    output += f"Tested: {result[10]}\n\n"
+
+                text_browser.setText(output)
+                self.search_result_window.exec_()
+
+            except sqlite3.Error as e:
+                self.show_error_message("Database Error", str(e))
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    main_menu = MainMenu()
+    main_menu.show()
+    sys.exit(app.exec_())

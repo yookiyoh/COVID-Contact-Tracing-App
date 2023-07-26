@@ -41,10 +41,10 @@ import sqlite3
 from pyfiglet import Figlet
 
 # Define the Contact Tracing App class that inherits the QMainWindow
-class ContactTracingApp (QMainWindow):
+class ContactTracingApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("COVID Contact Tracing App")
+        self.setWindowTitle("Space Trace")
 
         # Create a connection to the SQLite database
         try:
@@ -67,8 +67,8 @@ class ContactTracingApp (QMainWindow):
                                 symptoms TEXT,
                                 exposure TEXT,
                                 contact_with_symptoms TEXT,
-                                tested TEXT,
-                           )''')
+                                tested TEXT
+                            )''')
             self.conn.commit()
         except sqlite3.Error as e:
             self.show_error_message("Database Error", str(e))
@@ -141,7 +141,7 @@ class ContactTracingApp (QMainWindow):
         self.button_search.clicked.connect(self.search_entry)
         
         self.button_clear = QPushButton("Clear")        
-        self.button_clear.clicked.connect(self.clear_entry)
+        self.button_clear.clicked.connect(self.clear_fields)
 
         # Set up the layout
         layout = QGridLayout()
@@ -280,7 +280,7 @@ class ContactTracingApp (QMainWindow):
         try:
             # Insert the entry into the database
             self.c.execute('''INSERT INTO contacts (name, phone, email, address, last_place_visited, vaccinated, symptoms, exposure,
-                           contact_with_symptoms, tested) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                              contact_with_symptoms, tested) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
                            (name, phone, email, address, last_place_visited, vaccinated, symptoms, exposure, contact_with_symptoms, tested))
             self.conn.commit()
 
@@ -296,7 +296,7 @@ class ContactTracingApp (QMainWindow):
                 writer = csv.writer(file)
                 writer.writerow([name, phone, email, address, last_place_visited, vaccinated, symptoms, exposure, contact_with_symptoms, tested])
 
-            if vaccinated == "Not Yet" or symptoms != "None of the above" or exposure != "No" or contact_with_symptoms == "Yes" or tested == "Yes-Positive":
+            if vaccinated == "Not Yet" or symptoms != "None of the Above" or exposure != "No" or contact_with_symptoms == "Yes" or tested == "Yes-Positive":
                 self.show_message_box("Stay Home", "Please stay home and observe quarantine. Please take care of yourself.")
             
             # Clear other fields
@@ -311,7 +311,7 @@ class ContactTracingApp (QMainWindow):
         try:
             # Search for entries in the database that match the search term
             self.c.execute('''SELECT * FROM contacts WHERE
-                              name LIKE ? OR phone LIKE ? OR email LIKE ? OR address LIKE ? OR last_place_visited LIKE ?'''
+                              name LIKE ? OR phone LIKE ? OR email LIKE ? OR address LIKE ? OR last_place_visited LIKE ?''',
                            ('%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%',
                             '%' + search_term + '%', '%' + search_term + '%'))
             results = self.c.fetchall()
@@ -416,7 +416,6 @@ class ContactTracingApp (QMainWindow):
         # Prompt a confirmation dialog when closing the window
         reply = QMessageBox.question(self, 'Confirmation', "Are you sure you want to close this application?",
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        
         if reply == QMessageBox.Yes:
             # Start the fade-out animation
             self.fade_out_animation.start()
@@ -429,7 +428,6 @@ class ContactTracingApp (QMainWindow):
             
             # Wait for the fade-out animation to finish before exiting the application
             self.fade_out_animation.finished.connect(lambda: self.close_message_box())
-        
         else:
             event.ignore()
     
@@ -449,5 +447,3 @@ class ContactTracingApp (QMainWindow):
         f = Figlet(font='slant')
         error_message = f.renderText("Error!")
         print(error_message)
-
-        # Partially done
