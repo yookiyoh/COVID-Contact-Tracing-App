@@ -75,4 +75,21 @@ class ContactTracingApp (QMainWindow):
         except sqlite3.Error as e:
             self.show_error_message("Database Error", str(e))
             sys.exit()
-            
+        
+        # Create labels and entry fields for input
+        self.label_name = QLabel("Name:")
+        self.entry_name = QLineEdit()
+
+        self.label_phone = QLabel("Phone:")
+        self.entry_phone = QLineEdit()
+
+        self.label_email = QLabel("Email:")
+        self.entry_email = QLineEdit()
+
+        self.label_address = QLabel("Address:")
+        self.entry_address = QLineEdit()
+
+        self.label_last_place_visited = QLabel("Last Place Visited:")
+        self.entry_last_place_visited = QLineEdit()
+
+        
