@@ -330,4 +330,19 @@ class ContactTracingApp (QMainWindow):
             layout.addWidget(text_browser)
             dialog.setLayout(layout)
 
-            
+            # Display the search results in the text browser
+            output = ""
+            for result in results:
+                output += f"Name: {result[1]}\n"
+                output += f"Phone: {result[2]}\n"
+                output += f"Email: {result[3]}\n"
+                output += f"Address: {result[4]}\n"
+                output += f"Last Place Visited: {result[5]}\n"
+                output += f"Vaccinated: {result[6]}\n"
+                output += f"Symptoms: {result[7]}\n"
+                output += f"Exposure: {result[8]}\n"
+                output += f"Contact with Symptoms: {result[9]}\n"
+                output += f"Tested: {result[10]}\n"
+
+            text_browser.setText(output)
+            dialog.exec_()
